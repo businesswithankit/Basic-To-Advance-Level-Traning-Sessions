@@ -279,19 +279,26 @@ function closeCommentPopup() { document.getElementById("commentModal").style.dis
 
 function markComplete() {
     if (activeIndex === currentUnlock) {
+
         if (currentUnlock < videos.length - 1) {
+
             currentUnlock++;
-            localStorage.setItem('ankitCourse_unlock', currentUnlock);
+            localStorage.setItem("ankitCourse_unlock", currentUnlock);
             renderLessons();
             alert("NEXT CHAPTER UNLOCKED!");
+
         } else {
-            // Reaching end of course redirects to free ads setup
-            window.location.href = "https://businesswithankit.github.io/basic-material/";
+
+            document.getElementById("certificateModal").style.display = "flex";
+
         }
+
     } else {
+
         alert("COMPLETE PREVIOUS CHAPTERS FIRST OR ALREADY COMPLETED!");
+
     }
-}
+    }
 
 function verifyInviteCode() {
     const entered = document.getElementById("inviteInput").value.trim().toUpperCase();
@@ -325,15 +332,62 @@ function toggleFullScreen() {
 
 function controlVideo(f) { document.getElementById("videoFrame").contentWindow.postMessage(`{"event":"command","func":"${f}","args":""}`, "*"); }
 
+function downloadCertificate() {
+    window.open(
+        "https://drive.google.com/uc?export=download&id=1l_nvN2J0AAxrRotZ157uYoB3xbaRktIJ",
+        "_blank"
+    );
+}
+
+function closeCertificatePopup() {
+    document.getElementById("certificateModal").style.display = "none";
+}
+
 window.onload = () => {
-    // Shows the mandatory invite popup initially, content populates behind it.
+
     renderLessons();
     renderComments();
+
     setInterval(() => {
-        document.getElementById("liveCount").innerText = Math.floor(Math.random() * (165 - 145 + 1)) + 145;
+        document.getElementById("liveCount").innerText =
+        Math.floor(Math.random() * (165 - 145 + 1)) + 145;
     }, 3500);
+
 };
 </script>
+<!-- COURSE COMPLETE POPUP -->
+<div id="certificateModal" class="modal">
+    <div class="popup-card">
+
+        <h2 style="margin-bottom:20px;">🏆 COURSE COMPLETED</h2>
+
+        <img src="https://i.ibb.co/RGWnDy5G/file-00000000995871faa9ed99f3ed30bfdf.png"
+             style="width:100%;border-radius:15px;margin-bottom:20px;">
+
+        <p style="text-transform:none;margin-bottom:25px;">
+            Congratulations! Your Certificate & Study Material are ready.
+        </p>
+
+        <button class="btn btn-success"
+                style="width:100%;margin-bottom:12px;"
+                onclick="downloadCertificate()">
+            📄 DOWNLOAD CERTIFICATE
+        </button>
+
+        <button class="btn btn-blue"
+                style="width:100%;margin-bottom:12px;"
+                onclick="window.location.href='https://businesswithankit.github.io/basic-material/'">
+            📦 DOWNLOAD MATERIAL
+        </button>
+
+        <button class="btn"
+                style="width:100%;"
+                onclick="closeCertificatePopup()">
+            CLOSE
+        </button>
+
+    </div>
+</div>
 </body>
   </html>
   
